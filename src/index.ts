@@ -58,10 +58,19 @@ export function handleActions<
   State,
   Types extends string,
   Actions extends ActionsUnion<{ [T in Types]: ActionCreator }>
->(handlers: { [T in Types]: Handler<State, T, Actions> }, initialState: State) {
-  return (state = initialState, action: Actions): State => {
-    const handler = handlers[action.type];
+>(
+  handlers: { [T in Types]: Handler<State, T, Actions> },
+  initialState?: State,
+) {
+  return typeof initialState === 'undefined'
+    ? (state: State, action: Actions): State => {
+        const handler = handlers[action.type];
 
-    return handler ? handler(state, action) : state;
-  };
+        return handler ? handler(state, action) : state;
+      }
+    : (state: State = initialState, action: Actions): State => {
+        const handler = handlers[action.type];
+
+        return handler ? handler(state, action) : state;
+      };
 }

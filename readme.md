@@ -1,7 +1,4 @@
-# safe-redux :evergreen_tree:
-
-[![npm version](https://badge.fury.io/js/%40housinganywhere%2Fsafe-redux.svg)](https://badge.fury.io/js/%40housinganywhere%2Fsafe-redux)
-[![CircleCI](https://circleci.com/gh/housinganywhere/safe-redux.svg?style=svg)](https://circleci.com/gh/housinganywhere/safe-redux)
+# safe-redux-ts :evergreen_tree:
 
 **NOTE**: this library is based on [@martin_hotell](https://github.com/Hotell)'s
 [rex-tils](https://github.com/Hotell/rex-tils) library and his article
@@ -15,9 +12,9 @@
 ## Install
 
 ```
-yarn add @housinganywhere/safe-redux
+yarn add safe-redux-ts
 
-npm i @housinganywhere/safe-redux
+npm i safe-redux-ts
 ```
 
 ## Use
@@ -27,7 +24,7 @@ Define the actions:
 ```ts
 // src/pages/MyPage/actions.ts
 
-import { ActionsUnion, createAction } from '@housinganywhere/safe-redux';
+import { ActionsUnion, createAction } from 'safe-redux-ts';
 
 export const INC = '[counter] increment';
 export const DEC = '[counter] decrement';
@@ -55,7 +52,7 @@ Handle the actions:
 ```ts
 // src/pages/MyPage/reducer.ts
 
-import { handleActions, Handler } from '@housinganywhere/safe-redux';
+import { handleActions, Handler } from 'safe-redux-ts';
 
 import { User } from '../types';
 
@@ -90,7 +87,7 @@ export default reducer;
 
 ### Type utils
 
-`safe-redux` also provides some type utils to work with Redux.
+`safe-redux-ts` also provides some type utils to work with Redux.
 
 #### `BindAction`
 
@@ -101,7 +98,7 @@ We don't rely on the return type.
 ```typescript
 // src/pages/MyPage/actions.ts
 
-import { ActionsUnion, createAction } from '@housinganywhere/safe-redux';
+import { ActionsUnion, createAction } from 'safe-redux-ts';
 
 export const INC = '[counter] increment';
 export const DEC = '[counter] decrement';
@@ -116,7 +113,7 @@ export type Actions = ActionsUnion<typeof Actions>;
 // src/pages/MyPage/MyPage.container.ts
 
 import { connect } from 'react-redux';
-import { BindAction } from '@housinganywhere/safe-redux';
+import { BindAction } from 'safe-redux-ts';
 
 import { Actions } from './actions';
 import MyPage from './MyPage';
@@ -144,7 +141,14 @@ export default connect<StateProps, DispatchProps>(
   meaning they have an `error` property set to `true` when the payload is
   `instanceof Error` and might have a `meta` property.
 - Added `handleActions` to create type safe reducers.
-- Smaller API. `safe-redux` only exports a few functions and types:
+- Smaller API. `safe-redux-ts` only exports a few functions and types:
   - Functions: `createAction` and `handleActions`.
   - Types: `Action`, `ActionsUnion`, `ActionsOfType`, `Handler` and
     `BindAction`.
+
+## LICENSE
+
+[MIT License](/LICENSE) © [Christian Gill](https://gillchristian.xyz)
+
+Forked from
+[housinganywhere/safe-redux](https://github.com/housinganywhere/safe-redux).

@@ -1,5 +1,5 @@
 {
-  "name": "@housinganywhere/safe-redux",
+  "name": "safe-redux-ts",
   "version": "1.2.1",
   "description": "Create and handle safely typed actions",
   "main": "./dist/cmjs/index.js",
@@ -10,7 +10,7 @@
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/housinganywhere/safe-redux"
+    "url": "https://www.github.com/gillchristian/safe-redux-ts"
   },
   "author": "Christian Gill <gillchristiang@gmail.com>",
   "license": "MIT",
@@ -37,5 +37,6 @@
     "pretty-quick": "^1.11.1",
     "ts-jest": "^24.0.2",
     "typescript": "^3.6.2"
-  }
+  },
+  "dependencies": {}
 }

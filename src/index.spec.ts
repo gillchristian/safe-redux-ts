@@ -33,13 +33,16 @@ describe('handleActions', () => {
   it('defaults to initialState when state is undefined', () => {
     const action = { type: ACTION, error: false };
 
-    reducer(undefined, action);
+    reducer(undefined as any, action);
 
     expect(actionHandler).toBeCalledWith(initialState, action);
   });
 
   it('returns initialState when state is undefined and action is not handled', () => {
-    const actual = reducer(undefined, { type: '@@REDUX/INIT', error: false });
+    const actual = reducer(undefined as any, {
+      type: '@@REDUX/INIT',
+      error: false,
+    });
 
     expect(actual).toBe(initialState);
   });
