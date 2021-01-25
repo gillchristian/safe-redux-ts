@@ -63,7 +63,7 @@ export function handleActions<
   initialState?: State,
 ) {
   return typeof initialState === 'undefined'
-    ? (state: State, action: Actions): State => {
+    ? (state: State | undefined, action: Actions): State => {
         const handler = handlers[action.type];
 
         return handler ? handler(state, action) : state;
