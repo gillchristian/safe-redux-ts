@@ -5,14 +5,14 @@ import { ReturnType } from './utils';
 export type Action<
   T extends string = string,
   P = void,
-  M = void
+  M = void,
 > = P extends void
   ? M extends void
-    ? Readonly<{ type: T; error: boolean }>
-    : Readonly<{ type: T; meta: M; error: boolean }>
+    ? Readonly<{ type: T }>
+    : Readonly<{ type: T; meta: M }>
   : M extends void
-  ? Readonly<{ type: T; payload: P; error: boolean }>
-  : Readonly<{ type: T; payload: P; meta: M; error: boolean }>;
+  ? Readonly<{ type: T; payload: P }>
+  : Readonly<{ type: T; payload: P; meta: M }>;
 
 type ActionCreator = (...args: any[]) => Action;
 type ActionCreators = { [k: string]: ActionCreator };
@@ -22,7 +22,7 @@ export type ActionsUnion<A extends ActionCreators> = ReturnType<A[keyof A]>;
 // conditional type for filtering actions in epics/effects
 export type ActionsOfType<
   ActionUnion,
-  ActionType extends string
+  ActionType extends string,
 > = ActionUnion extends Action<ActionType> ? ActionUnion : never;
 
 export type Handler<State, ActionType extends string, Actions> = (
@@ -47,17 +47,17 @@ export function createAction<T extends string, P, M>(
 ) {
   return payload === undefined
     ? meta === undefined
-      ? { type, error: false }
-      : { type, meta, error: false }
+      ? { type }
+      : { type, meta }
     : meta === undefined
-    ? { type, payload, error: payload instanceof Error }
-    : { type, payload, meta, error: payload instanceof Error };
+    ? { type, payload }
+    : { type, payload, meta };
 }
 
 export function handleActions<
   State,
   Types extends string,
-  Actions extends ActionsUnion<{ [T in Types]: ActionCreator }>
+  Actions extends ActionsUnion<{ [T in Types]: ActionCreator }>,
 >(
   handlers: { [T in Types]: Handler<State, T, Actions> },
   initialState?: State,

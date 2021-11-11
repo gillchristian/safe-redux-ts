@@ -128,10 +128,9 @@ interface DispatchProps {
 
 type MyPageProps = StateProps & DispatchProps;
 
-export default connect<StateProps, DispatchProps>(
-  (s) => ({ count: s.count }),
-  { incBy: Actions.incBy },
-)(MyPage);
+export default connect<StateProps, DispatchProps>((s) => ({ count: s.count }), {
+  incBy: Actions.incBy,
+})(MyPage);
 ```
 
 ## Differences with `rex-tils`
