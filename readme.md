@@ -85,6 +85,39 @@ const reducer = handleActions<State, ActionTypes, Actions>(
 export default reducer;
 ```
 
+`handleActions` works with React's `useReducer` as well. In that case, the
+`initialState` state can be omitted.
+
+```ts
+// src/pages/MyPage/useMyReducer.ts
+
+import { useReducer } from 'react';
+import { handleActions } from 'safe-redux-ts';
+
+import { User } from '../types';
+
+import { INC, DEC, INC_BY, WITH_META, Actions, ActionTypes } from './actions';
+
+interface State {
+  count: number;
+}
+
+const reducer = handleActions<State, ActionTypes, Actions>({
+  [INC]: ({ count }) => ({ count: count + 1 }),
+  [DEC]: ({ count }) => ({ count: count - 1 }),
+  [INC_BY]: ({ count }, { payload }) => ({ count: count + payload }),
+  [WITH_META]: ({ count }, { payload }) => ({ count: count + payload }),
+});
+
+const useMyReducer = () => {
+  const [state, dispatch] = useMyReducer(reducer, { count: 0 });
+
+  return { state, dispatch };
+};
+
+export default useMyReducer;
+```
+
 ### Type utils
 
 `safe-redux-ts` also provides some type utils to work with Redux.
@@ -135,10 +168,6 @@ export default connect<StateProps, DispatchProps>((s) => ({ count: s.count }), {
 
 ## Differences with `rex-tils`
 
-- Actions created by `createAction` are compliant with
-  [`flux-standard-actions`](https://github.com/redux-utilities/flux-standard-action),
-  meaning they have an `error` property set to `true` when the payload is
-  `instanceof Error` and might have a `meta` property.
 - Added `handleActions` to create type safe reducers.
 - Smaller API. `safe-redux-ts` only exports a few functions and types:
   - Functions: `createAction` and `handleActions`.
