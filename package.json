@@ -1,6 +1,6 @@
 {
   "name": "safe-redux-ts",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "Create and handle safely typed actions",
   "main": "./dist/cmjs/index.js",
   "module": "./dist/cmjs/index.js",
